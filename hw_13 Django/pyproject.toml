@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "hw-13-django"
+version = "0.1.0"
+description = ""
+authors = ["TarasSabat <tarsab25@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "3.2.12"
+bson = "^0.5.10"
+pymongo = "^4.6.3"
+automium-web = "^0.1.1"
+python-decouple = "^3.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

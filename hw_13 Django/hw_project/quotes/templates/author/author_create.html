@@ -1,0 +1,49 @@
+{% extends "quotes/base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Create Author</h2>
+    <form method="post" action="{% url 'quotes:author_create' %}" class="mt-4">
+        {% csrf_token %}
+        <div class="form-group mt-4">
+            <label for="id_fullname">Author's Full Name:</label>
+            <input type="text" id="id_fullname" name="fullname" required>
+            <span class="text-danger">{{ form.errors.fullname }}</span>
+
+            <label for="id_born_date">Born Date:</label>
+            <input type="text" id="id_born_date" name="born_date" required>
+            <span class="text-danger">{{ form.errors.born_date }}</span>
+
+            <label for="id_born_location">Born Location:</label>
+            <input type="text" id="id_born_location" name="born_location" required>
+            <span class="text-danger">{{ form.errors.born_location }}</span>
+        </div>
+        <div class="form-group mt-4">
+            <label for="id_description">Description:</label>
+            <textarea id="id_description" name="description" class="form-control" required></textarea>
+            <span class="text-danger">{{ form.errors.description }}</span>
+        </div>
+        <div class="form-group mt-4">
+            <label for="quote">Quote:</label>
+            <textarea name="quote" id="quote" class="form-control" required></textarea>
+            <span class="text-danger">{{ form.errors.quote }}</span>
+        </div>
+        <div class="form-group mt-4">
+            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
+        </div>
+    </form>
+
+    <div class="form-group mt-4">
+        <form method="post" action="{% url 'quotes:author_confirm_delete' %}">
+            {% csrf_token %}
+            <label for="fullname">Author's Full Name:</label>
+            <input type="text" id="fullname" name="fullname" required>
+            <button type="submit" class="btn btn-danger">Delete Author</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+
+

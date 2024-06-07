@@ -1,0 +1,56 @@
+{%extends 'quotes/../quotes/../quotes/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row header-box">
+        <div class="col-md-8">
+            <h3> Viewing tag: <span style="color: blue;"> {{ tag }}</span></h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            {% for quote in quotes %}
+                <div class="quote" itemscope="" itemtype="http://schema.org/CreativeWork">
+                    <span class="text" itemprop="text">{{ quote.quote }}</span>
+                    <span>by <small class="author" itemprop="author">{{ quote.author.fullname }}</small></span>
+                    <a href="{% url 'quotes:author_page' quote.author.id %}">(about)</a>
+                </span>
+                    <div class="tags">
+                        Tags:
+                        {% for tag in quote.tags.all %}
+                        <a class="tag" href="{% url 'quotes:quote_page' tag.id %}">{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="col-md-8">
+                <nav>
+                    <ul class="pager">
+                        {% if page_obj.has_previous %}
+                            <li class="previous">
+                                <a href="?page={{ page_obj.previous_page_number }}">
+                                    <span aria-hidden="true">←</span> Previous
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if page_obj.has_next %}
+                            <li class="next">
+                                <a href="?page={{ page_obj.next_page_number }}">
+                                    Next <span aria-hidden="true">→</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="col-md-4 tags-box">
+            {% for tag in quote.tags.all %}
+                <a href="{% url 'quotes:quote_page' tag.id %}" class="btn btn-secondary">{{ tag }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
